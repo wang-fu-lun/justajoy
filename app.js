@@ -11,6 +11,7 @@ const session = require("express-session");
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const captchaRouter = require('./routes/captcha.js');
+const positionsRouter = require('./routes/positions.js');
 
 // 创建 Express 应用实例
 const app = express();
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter); // 访问项目根下资源
 app.use('/users', usersRouter); // 访问users目录下资源
 app.use('/captcha', captchaRouter); // 访问captcha目录下资源
+app.use('/positions', positionsRouter); // 访问positions目录下资源
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

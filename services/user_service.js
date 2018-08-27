@@ -2,7 +2,8 @@ const UserDao = require("../dao/user_dao.js");
 const bcrypt = require("bcrypt"); // 加密
 
 const UserService = {
-	login(req,res,nex) {
+	// 登录
+	login(req, res, next) {
 		// 获取登录时的用户名与密码
 		const {username, password} = req.body;
 		// 根据用户名查询用户信息
@@ -32,12 +33,12 @@ const UserService = {
 		const {username, password, email} = req.body;
 		// 验证用户名是否已被注册
 		// ...
-		//对密码进行加密
+		// 对密码加密
 		const passCrypt = bcrypt.hashSync(password, 10);
-		console.log(passCrypt);
+		console.log(passCrypt)
 		// 保存用户用户信息
 		UserDao
-			.save({username, password:passCrypt, email})
+			.save({username, password: passCrypt, email})
 			.then((data)=>{
 				res.json({res_code:1, res_error:"", res_body: data});
 			})
