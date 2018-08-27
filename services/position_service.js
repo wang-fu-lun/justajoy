@@ -4,14 +4,14 @@ const PositionService = {
 	// 添加职位
 	add(req, res, next) {
 		// 从请求主体中解构文本数据
-		const {name, salary, city} = req.body;
+		const {name, complyname, experience, type, city, salary} = req.body;
 		// 将上传文件的logo文件名保存
 		let logo = "";
 		if (req.file)
 			logo = req.file.filename;
 		// 保存到数据库
 		PositionDao
-			.save({name, logo, salary, city})
+			.save({name, logo, complyname, experience, type, city, salary})
 			.then(data=>{
 				res.json({res_code:1, res_error:"", res_body: data})
 			})
