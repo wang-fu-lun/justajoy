@@ -15,6 +15,7 @@ LoginModal.template = `<div class="modal fade" id="loginModal" tabindex="-1">
 	        <h4 class="modal-title" id="myModalLabel">用户登录</h4>
 	      </div>
 	      <div class="modal-body">
+	      	<div class="alert alert-danger hide login-err">用户名或密码错误</div>
 	        <form class="login-form">
 			  <div class="form-group">
 			    <label for="loginUsername">用户名</label>
@@ -49,6 +50,7 @@ $.extend(LoginModal.prototype, {
 	},
 	// 注册事件监听
 	addListener() {
+		// 点击“登录”按钮
 		$(".btn-login").on("click", this.loginHandler)
 	},
 	// 登录业务处理
@@ -58,10 +60,19 @@ $.extend(LoginModal.prototype, {
 		// ajax提交登录处理
 		$.post("/users/login", data, (resData)=>{
 			console.log(resData);
-		}).done(()=>{
+			if (resData.res_code === 1) { // 登录成功
+				$("#loginModal").modal("hide");
+				$(".login-success").removeClass("hide").siblings(".not-login").remove();
+				// 将登录成功的用户信息保存起来，保存到 sessionStorage 中
+				sessionStorage.loginUser = JSON.stringify(resData.res_body);
+				// sessionStorage.setItem("loginUser", JSON.stringify(resData.res_body));
+			} else {
+				$(".login-err").removeClass("hide");
+			}
+		})/*.done(()=>{
 			$("#loginModal").modal("hide");
 		}).done(()=>{
 			$(".login-success").removeClass("hide").siblings(".not-login").remove();
-		});
+		})*/;
 	}
 });
