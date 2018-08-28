@@ -12,8 +12,8 @@ const User = mongoose.model("user", {
 
 // 职位模型
 const Position = mongoose.model("position", {
-	name: String,
 	logo: String,
+	name: String,
 	complyname: String, 
 	experience: String, 
 	type: String,

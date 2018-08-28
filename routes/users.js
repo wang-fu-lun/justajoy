@@ -5,6 +5,8 @@ const UserService = require("../services/user_service.js");
 // http://localhost:3000/users/login
 router.post("/login", UserService.login);
 
+router.get("/logout", UserService.logout);
+
 /* 用户注册 */
 // http://localhost:3000/users/register
 router.post("/register", UserService.register);
